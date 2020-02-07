@@ -4,31 +4,45 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import javax.print.attribute.standard.Sides;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.pankaj.metilica.metallicatradeservice.TradeExchangeRepository;
 
 @RestController
 public class TradeController {
 	
+	@Autowired
+	TradeExchangeRepository tradeRepo;
 	
- @GetMapping(produces ="application/json",value= "/trades")
+ @GetMapping(produces ="application/json",value= "/trades1")
  public List<TradeExchangeValue> getTradingExchnagesValue(@RequestParam String side,@RequestParam String fromDate,@RequestParam String toDate,@RequestParam String status) {
-	
-	 STATUS curStatus = STATUS.valueOf(status);
-	 Date localDate = new Date();
-	Counterparty counterparty = new Counterparty("AAPL", "Apple Inc.");
-	Counterparty counterparty1 = new Counterparty("Samsumng", "Samsung limted");
-	Counterparty counterparty2 = new Counterparty("Amazon", "Amazon Inc.");
-	List<TradeExchangeValue> list= new ArrayList<TradeExchangeValue>();
-	list.add(new TradeExchangeValue(SIDE.valueOf(side), new BigDecimal(1000),2000 ,localDate, 
-			curStatus, "India", "AL", counterparty,fromDate,toDate));
-	list.add(new TradeExchangeValue(SIDE.valueOf(side), new BigDecimal(1000),1203 ,localDate, 
-			curStatus, "China", "AL", counterparty1,fromDate,toDate));
-	list.add(new TradeExchangeValue(SIDE.valueOf(side), new BigDecimal(500),1000 ,localDate, 
-			curStatus, "USA", "AL", counterparty2,fromDate,toDate));
-	return list;
+			
+	return  tradeRepo.findTradeByStatusAndNameNamedParamsNative(status,side);
 	}
  
+ 
+ 	@GetMapping("/trades/getAll")
+ 	public List<TradeExchangeValue> getAllRecords(){
+ 		return tradeRepo.findAll();
+ 	}
+ 	
+ 	
+ 	@GetMapping("/trades")
+ 	public ModelAndView index () {
+ 	    ModelAndView modelAndView = new ModelAndView();
+ 	    modelAndView.setViewName("index");
+ 	    return modelAndView;
+ 	}
 }

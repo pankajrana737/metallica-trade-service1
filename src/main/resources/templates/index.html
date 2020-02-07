@@ -95,9 +95,61 @@ div.container {
  
 <script>
 
+function loadData(){
+
+    	 //clear all the content from tbody here.
+    
+	var urlApi="http://localhost:8000/trades/getAll";
+
+$.ajax({
+        url : urlApi,
+        type : "GET",
+        contentType: "application/json",
+         dataType: 'json',
+    	 //data: $('form').serialize(),
+    	   success : function(data) {
+        			for(var i=0; i< data.length;i++){
+        				
+     
+			 var tr;
+	          
+	          tr = $('<tr/>');
+		   
+	                          
+	                            tr.append("<td>" + data[i].price + "</td>");
+	                            tr.append("<td>" + data[i].quantity + "</td>");
+	                            tr.append("<td>" + 	 data[i].fromDateDate      + "</td>");
+	                            tr.append("<td>" + data[i].toDate + "</td>");
+	                            tr.append("<td>" +data[i].tradeStatus + "</td>");
+	                            tr.append("<td>" + data[i].commodity  + "</td>");
+	                            tr.append("<td>" + data[i].side + "</td>");
+	                            tr.append("<td>" +  data[i].location   + "</td>");
+	                            tr.append("<td>" +data[i].counterparty.counterPartyId+ "</td>");
+	                            tr.append("<td>" + data[i].counterparty.counterPartyName + "</td>");
+	                       
+	                          
+	                            $("table").show();
+	                        	
+	                        
+	                            $('table').append(tr);
+	                    
+    
+		}
+                      
+                       
+                         
+		 
+        },
+        error : function(response,error)
+        {
+            console.log("ERROR: "+JSON.stringify(response));
+        }
+    });
+}// end here function
 
 $(document).ready(function(){
 	$("table").hide();
+	loadData();
 	
     $('#myFormId').on('submit', function (e) {
     
@@ -106,7 +158,7 @@ $(document).ready(function(){
     	 //clear all the content from tbody here.
     	
     	   e.preventDefault();
-	var urlApi="http://localhost:8000/trades";
+	var urlApi="http://localhost:8000/trades1";
 
 $.ajax({
         url : urlApi,
@@ -125,8 +177,8 @@ $.ajax({
 	                          
 	                            tr.append("<td>" + data[i].price + "</td>");
 	                            tr.append("<td>" + data[i].quantity + "</td>");
-	                            tr.append("<td>" + 	 data[i].from      + "</td>");
-	                            tr.append("<td>" + data[i].to + "</td>");
+	                            tr.append("<td>" + 	 data[i].fromDateDate      + "</td>");
+	                            tr.append("<td>" + data[i].toDate + "</td>");
 	                            tr.append("<td>" +data[i].tradeStatus + "</td>");
 	                            tr.append("<td>" + data[i].commodity  + "</td>");
 	                            tr.append("<td>" + data[i].side + "</td>");
@@ -185,6 +237,7 @@ $.ajax({
  </span>
  
     <input type="submit" value="Submit" >
+      <input type="submit" value="Clear"  onclick="loadData()">
   </form>
 
 <table class="imagetable" id="myTable">

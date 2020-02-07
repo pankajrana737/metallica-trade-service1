@@ -1,5 +1,9 @@
 package com.pankaj.metilica.metallicatradeservice.comtroller;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+
+@Embeddable
 public class Counterparty {
 	
 	private String counterPartyId;

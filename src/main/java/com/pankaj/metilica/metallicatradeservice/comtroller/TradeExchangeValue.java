@@ -1,27 +1,43 @@
 package com.pankaj.metilica.metallicatradeservice.comtroller;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.Type;
+
 
 
 @Entity
 
-public class TradeExchangeValue {
+public class TradeExchangeValue implements Serializable {
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2884652353330270495L;
 		@Id
 		private long ID;
+		@Enumerated(EnumType.STRING)
 		private SIDE Side;
 		private BigDecimal price;
 		private int quantity;
-		private Date date;
+		 @Enumerated(EnumType.STRING)
 		private  STATUS TradeStatus ;
 		private String location;
 		private String commodity;
+		
 		private Counterparty counterparty;
-		private String from;
-		private String to;
+		@Column(name = "From_date")
+		private String fromDate;
+		@Column(name = "To_date")
+		private String toDate;
+		
 		public SIDE getSide() {
 			return Side;
 		}
@@ -40,12 +56,8 @@ public class TradeExchangeValue {
 		public void setQuantity(int quantity) {
 			this.quantity = quantity;
 		}
-		public Date getDate() {
-			return date;
-		}
-		public void setDate(Date date) {
-			this.date = date;
-		}
+		
+		@Enumerated(EnumType.STRING)
 		public STATUS getTradeStatus() {
 			return TradeStatus;
 		}
@@ -70,35 +82,36 @@ public class TradeExchangeValue {
 		public void setCounterparty(Counterparty counterparty) {
 			this.counterparty = counterparty;
 		}
-		public String getFrom() {
-			return from;
+		public String getfromDateDate() {
+			return fromDate;
 		}
-		public void setFrom(String from) {
-			this.from = from;
+		public void setfromDateDate(String fromDateDate) {
+			this.fromDate = fromDate;
 		}
-		public String getTo() {
-			return to;
+		public String gettoDate() {
+			return toDate;
 		}
-		public void setTo(String to) {
-			this.to = to;
+		public void settoDate(String toDate) {
+			this.toDate = toDate;
 		}
-		public TradeExchangeValue(SIDE side, BigDecimal price, int quantity, Date date, STATUS tradeStatus,
-				String location, String commodity, Counterparty counterparty, String from, String to) {
+		public TradeExchangeValue(SIDE side, BigDecimal price, int quantity,STATUS tradeStatus,
+				String location, String commodity, Counterparty counterparty, String fromDate, String toDate) {
 			super();
 			Side = side;
 			this.price = price;
 			this.quantity = quantity;
-			this.date = date;
-			TradeStatus = tradeStatus;
+		
+			this.TradeStatus = tradeStatus;
 			this.location = location;
 			this.commodity = commodity;
 			this.counterparty = counterparty;
-			this.from = from;
-			this.to = to;
+			
+			this.fromDate = fromDate;
+			this.toDate = toDate;
 		}
 		public TradeExchangeValue() {
 			super();
-			// TODO Auto-generated constructor stub
+			// toDateDO AutoDate-generated constructoDater stub
 		}
 		
 		
