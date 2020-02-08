@@ -3,6 +3,7 @@ package com.pankaj.metilica.metallicatradeservice.comtroller;
 
 
 public class LocationBean {
+
 	private long id;	
 	
 	private String locationName;
@@ -43,6 +44,10 @@ public class LocationBean {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		
+		@Override
+		public String toString() {
+			return "LocationBean [id=" + id + ", locationName=" + locationName + ", latitude=" + latitude + ", longitude="
+					+ longitude + "]";
+		}
 }
 
