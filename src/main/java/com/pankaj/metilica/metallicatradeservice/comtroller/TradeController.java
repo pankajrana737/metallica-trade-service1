@@ -1,26 +1,15 @@
 package com.pankaj.metilica.metallicatradeservice.comtroller;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import javax.print.attribute.standard.Sides;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,8 +38,13 @@ public class TradeController {
 			        HttpMethod.GET, 
 			        entity, 
 			        LocationBean.class);
-				System.out.println("dfsds"+response);	
-			return  tradeRepo.findTradeByStatusAndNameNamedParamsNative(status,side);
+			
+			tradeRepo.findTradeByStatusAndNameNamedParamsNative(status,side).forEach(s->System.out.println(s.getLocation()));
+				List<TradeExchangeValue> filteredData = tradeRepo.findTradeByStatusAndNameNamedParamsNative(status,side)
+				.stream().filter( t->t.getLocation().getLocationName().equalsIgnoreCase(response.getBody().getLocationName()) )
+				.collect(Collectors.toList());
+	
+			return filteredData ;
 	}
  
  

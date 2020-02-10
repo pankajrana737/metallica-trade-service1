@@ -76,6 +76,12 @@ public class TradeExchangeValue implements Serializable {
 		public void setCommodity(String commodity) {
 			this.commodity = commodity;
 		}
+		@Override
+		public String toString() {
+			return "TradeExchangeValue [ID=" + ID + ", Side=" + Side + ", price=" + price + ", quantity=" + quantity
+					+ ", TradeStatus=" + TradeStatus + ", location=" + location + ", commodity=" + commodity
+					+ ", counterparty=" + counterparty + ", fromDate=" + fromDate + ", toDate=" + toDate + "]";
+		}
 		public Counterparty getCounterparty() {
 			return counterparty;
 		}
