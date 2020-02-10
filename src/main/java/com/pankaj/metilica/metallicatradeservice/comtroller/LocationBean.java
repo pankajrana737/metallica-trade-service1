@@ -1,23 +1,28 @@
 package com.pankaj.metilica.metallicatradeservice.comtroller;
 
+import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Embeddable
 public class LocationBean {
 
-	private long id;	
+	
+	private long locationId;	
 	
 	private String locationName;
 		private float latitude;
 		private float longitude;
+		@JsonIgnore
 		public long getId() {
-			return id;
+			return locationId;
 		}
 		public void setId(long id) {
-			this.id = id;
+			this.locationId = id;
 		}
-		public LocationBean(long id, String locationName, float latitude, float longitude) {
+		public LocationBean(long locationId, String locationName, float latitude, float longitude) {
 			super();
-			this.id = id;
+			this.locationId = locationId;
 			this.locationName = locationName;
 			this.latitude = latitude;
 			this.longitude = longitude;
@@ -46,7 +51,7 @@ public class LocationBean {
 		}
 		@Override
 		public String toString() {
-			return "LocationBean [id=" + id + ", locationName=" + locationName + ", latitude=" + latitude + ", longitude="
+			return "LocationBean [id=" + locationId + ", locationName=" + locationName + ", latitude=" + latitude + ", longitude="
 					+ longitude + "]";
 		}
 }

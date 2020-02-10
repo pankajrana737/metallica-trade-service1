@@ -124,11 +124,13 @@ $.ajax({
 	                            tr.append("<td>" +data[i].tradeStatus + "</td>");
 	                            tr.append("<td>" + data[i].commodity  + "</td>");
 	                            tr.append("<td>" + data[i].side + "</td>");
-	                            tr.append("<td>" +  data[i].location   + "</td>");
+	                            tr.append("<td>" +  data[i].location.locationName   + "</td>");
+	                            tr.append("<td>" +  data[i].location.latitude   + "</td>");
+	                            tr.append("<td>" +  data[i].location.longitude   + "</td>");
 	                            tr.append("<td>" +data[i].counterparty.counterPartyId+ "</td>");
 	                            tr.append("<td>" + data[i].counterparty.counterPartyName + "</td>");
 	                       
-	                          
+	                   
 	                            $("table").show();
 	                        	
 	                        
@@ -183,10 +185,11 @@ $.ajax({
 	                            tr.append("<td>" +data[i].tradeStatus + "</td>");
 	                            tr.append("<td>" + data[i].commodity  + "</td>");
 	                            tr.append("<td>" + data[i].side + "</td>");
-	                            tr.append("<td>" +  data[i].location   + "</td>");
+	                            tr.append("<td>" +  data[i].location.locationName   + "</td>");
+	                            tr.append("<td>" +  data[i].location.latitude   + "</td>");
+	                            tr.append("<td>" +  data[i].location.longitude   + "</td>");
 	                            tr.append("<td>" +data[i].counterparty.counterPartyId+ "</td>");
 	                            tr.append("<td>" + data[i].counterparty.counterPartyName + "</td>");
-	                       
 	                          
 	                            $("table").show();
 	                        	
@@ -252,6 +255,8 @@ $.ajax({
         <th>Commodity</th>
         <th>Side</th>
           <th>Location</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
         <th>Counter Party ID</th>
         <th>Counter Party Name</th>
        

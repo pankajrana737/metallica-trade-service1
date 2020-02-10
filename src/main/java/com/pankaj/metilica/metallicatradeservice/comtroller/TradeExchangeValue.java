@@ -29,7 +29,7 @@ public class TradeExchangeValue implements Serializable {
 		private int quantity;
 		 @Enumerated(EnumType.STRING)
 		private  STATUS TradeStatus ;
-		private String location;
+		private LocationBean location;
 		private String commodity;
 		
 		private Counterparty counterparty;
@@ -64,10 +64,10 @@ public class TradeExchangeValue implements Serializable {
 		public void setTradeStatus(STATUS tradeStatus) {
 			TradeStatus = tradeStatus;
 		}
-		public String getLocation() {
+		public LocationBean getLocation() {
 			return location;
 		}
-		public void setLocation(String location) {
+		public void setLocation(LocationBean location) {
 			this.location = location;
 		}
 		public String getCommodity() {
@@ -95,7 +95,7 @@ public class TradeExchangeValue implements Serializable {
 			this.toDate = toDate;
 		}
 		public TradeExchangeValue(SIDE side, BigDecimal price, int quantity,STATUS tradeStatus,
-				String location, String commodity, Counterparty counterparty, String fromDate, String toDate) {
+				LocationBean location, String commodity, Counterparty counterparty, String fromDate, String toDate) {
 			super();
 			Side = side;
 			this.price = price;

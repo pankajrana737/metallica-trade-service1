@@ -13,6 +13,10 @@ import java.util.stream.Collectors;
 import javax.print.attribute.standard.Sides;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.pankaj.metilica.metallicatradeservice.TradeExchangeRepository;
 
@@ -31,10 +36,20 @@ public class TradeController {
 	
  @GetMapping(produces ="application/json",value= "/trades1")
  public List<TradeExchangeValue> getTradingExchnagesValue(@RequestParam String side,@RequestParam String fromDate,@RequestParam String toDate,@RequestParam String status) {
-			Map<String, String> urlVariables= new HashMap<>();
-			urlVariables.putIfAbsent("location", "delhi");
-			LocationBean forObject = new RestTemplate().getForObject("http://localhost:5000/ref-data-service?location=", LocationBean.class, urlVariables= new HashMap<>());
-	System.out.println(forObject);
+			
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+			String url = "http://localhost:5000/ref-data-service";
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url).queryParam("location","101");
+			HttpEntity<?> entity = new HttpEntity<>(headers);
+
+			HttpEntity<LocationBean> response = new RestTemplate().exchange(
+			        builder.toUriString(), 
+			        HttpMethod.GET, 
+			        entity, 
+			        LocationBean.class);
+				System.out.println("dfsds"+response);	
 			return  tradeRepo.findTradeByStatusAndNameNamedParamsNative(status,side);
 	}
  

@@ -10,7 +10,7 @@ import com.pankaj.metilica.metallicatradeservice.comtroller.TradeExchangeValue;
 
 public interface TradeExchangeRepository extends JpaRepository<TradeExchangeValue,Integer>{
 
-	@Query(value = "SELECT * FROM TRADE_EXCHANGE_VALUE u WHERE u.trade_status  = (?1) and u.side = (?2)",
+	@Query(value = "SELECT * FROM TRADE_EXCHANGE_VALUE u WHERE u.trade_status  = ? and u.side = ?",
 		//	+ "or u.FROM_DATE=  (?3) or u.TO_DATE = (?4)", 
 			  nativeQuery = true)
 	List<TradeExchangeValue> findTradeByStatusAndNameNamedParamsNative(
